@@ -1,32 +1,34 @@
 <template>
-    <div v-if="!loaded">
-        <h2>
-            Loading{{ loadingDots }}
-        </h2>
-    </div>
-    <div v-else-if="items.length === 0 && loaded">
-        Did not get any data
-    </div>
-    <div v-else-if="items.length > 0 && loaded" class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th v-for="(column, field) in columns" :key="field">
-                        {{ column }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in visibleItems" :key="item.name">
-                    <td v-for="field in Object.keys(columns)" :key="item.name + field">
-                        <slot :name="field" :item="item">
-                            {{ item[field] }}
-                        </slot>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="pagination">
+    <div>
+        <div v-if="!loaded">
+            <h2>
+                Loading{{ loadingDots }}
+            </h2>
+        </div>
+        <div v-else-if="items.length === 0 && loaded">
+            Did not get any data
+        </div>
+        <div v-else-if="items.length > 0 && loaded" class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(column, field) in columns" :key="field">
+                            {{ column }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in visibleItems" :key="item.name">
+                        <td v-for="field in Object.keys(columns)" :key="item.name + field">
+                            <slot :name="field" :item="item">
+                                {{ item[field] }}
+                            </slot>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination" v-if="loaded && numberOfPages > 1">
             <button @click="selectedPage = (selectedPage - 1)" :disabled="selectedPage === 1">
                 &lt;
             </button>
@@ -150,8 +152,7 @@ export default {
         background-color: white
     }
     .pagination {
-        position: sticky;
-        left: 0;
+        margin: 1em auto;
     }
     button {
         background-color: #7900a0;
