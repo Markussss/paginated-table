@@ -1,5 +1,7 @@
 # paginated-table
 
+Small demo of a paginated table. I'm using [this](https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc&per_page=100) page from the Github API as test data.
+
 ## Project setup
 ```
 npm install
@@ -13,11 +15,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
